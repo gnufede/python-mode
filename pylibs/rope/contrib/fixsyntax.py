@@ -26,7 +26,7 @@ class FixSyntax(object):
                                                             force_errors=True)
                 return self.pycore.get_string_module(
                     code, resource=self.resource, force_errors=True)
-            except exceptions.ModuleSyntaxError, e:
+            except exceptions.ModuleSyntaxError as e:
                 if tries < self.maxfixes:
                     tries += 1
                     self.commenter.comment(e.lineno)

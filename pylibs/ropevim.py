@@ -301,7 +301,7 @@ class VimUtils(environment.Environment):
                 _vim_name(name), _vim_name(name)
             )
         )
-        if key is not None:
+        if key is not None and prekey:
             key = prekey + key.replace(' ', '')
             vim.command(
                 'noremap {0} :call {1}()<cr>'.format(key, _vim_name(name))
@@ -380,7 +380,7 @@ class VimProgress(object):
 
 def echo(message):
     message = message.encode(VimUtils._get_encoding())
-    print message
+    print(message)
 
 
 def status(message):
@@ -399,7 +399,7 @@ class _ValueCompleter(object):
 
     def __init__(self):
         self.values = []
-        vim.command('python import vim')
+        vim.command('py3 import vim')
         vim.command('function! RopeValueCompleter(A, L, P)\n'
                     'python args = [vim.eval("a:" + p) for p in "ALP"]\n'
                     'python ropevim._completer(*args)\n'

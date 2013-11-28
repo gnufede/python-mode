@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 import threading
-from Queue import Queue, Empty
+from queue import Queue, Empty
 
 from .interface import show_message
 

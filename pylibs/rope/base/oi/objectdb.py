@@ -1,4 +1,5 @@
-import UserDict
+from collections import UserDict
+from collections import MutableMapping
 
 
 class ObjectDB(object):
@@ -78,7 +79,7 @@ class ObjectDB(object):
             self.files[path].create_scope(key)
         result = self.files[path][key]
         if isinstance(result, dict):
-            print self.files, self.files[path], self.files[path][key]
+            print(self.files, self.files[path], self.files[path][key])
         return result
 
     def _file_removed(self, path):
@@ -120,13 +121,13 @@ class _NullScopeInfo(object):
             raise NotImplementedError()
 
 
-class FileInfo(UserDict.DictMixin):
+class FileInfo(MutableMapping):
 
     def create_scope(self, key):
         pass
 
 
-class FileDict(UserDict.DictMixin):
+class FileDict(MutableMapping):
 
     def create(self, key):
         pass

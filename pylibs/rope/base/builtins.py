@@ -263,7 +263,7 @@ class List(BuiltinClass):
         # Getting methods
         collector('__getitem__', function=self._list_get)
         collector('pop', function=self._list_get)
-        collector('__getslice__', function=self._self_get)
+        #collector('__getslice__', function=self._self_get)
 
         super(List, self).__init__(list, collector.attributes)
 
@@ -483,8 +483,8 @@ class Str(BuiltinClass):
         collector = _AttributeCollector(str)
         collector('__iter__', get_iterator(self_object), check_existence=False)
 
-        self_methods = ['__getitem__', '__getslice__', 'capitalize', 'center',
-                        'decode', 'encode', 'expandtabs', 'join', 'ljust',
+        self_methods = ['__getitem__', 'capitalize', 'center',
+                        'encode', 'expandtabs', 'join', 'ljust',
                         'lower', 'lstrip', 'replace', 'rjust', 'rstrip', 'strip',
                         'swapcase', 'title', 'translate', 'upper', 'zfill']
         for method in self_methods:
@@ -560,18 +560,18 @@ class File(BuiltinClass):
         str_object = get_str()
         str_list = get_list(get_str())
         attributes = {}
-        def add(name, returned=None, function=None):
-            builtin = getattr(file, name, None)
-            attributes[name] = BuiltinName(
-                BuiltinFunction(returned=returned, function=function,
-                                builtin=builtin))
-        add('__iter__', get_iterator(str_object))
-        for method in ['next', 'read', 'readline', 'readlines']:
-            add(method, str_list)
-        for method in ['close', 'flush', 'lineno', 'isatty', 'seek', 'tell',
-                       'truncate', 'write', 'writelines']:
-            add(method)
-        super(File, self).__init__(file, attributes)
+        #def add(name, returned=None, function=None):
+        #    builtin = getattr(file, name, None)
+        #    attributes[name] = BuiltinName(
+        #        BuiltinFunction(returned=returned, function=function,
+        #                        builtin=builtin))
+        #add('__iter__', get_iterator(str_object))
+        #for method in ['next', 'read', 'readline', 'readlines']:
+        #    add(method, str_list)
+        #for method in ['close', 'flush', 'lineno', 'isatty', 'seek', 'tell',
+        #               'truncate', 'write', 'writelines']:
+        #    add(method)
+        #super(File, self).__init__(file, attributes)
 
 
 get_file = _create_builtin_getter(File)
@@ -761,7 +761,7 @@ _initial_builtins = {
     'object': BuiltinName(BuiltinObject()),
     'type': BuiltinName(BuiltinType()),
     'iter': BuiltinName(BuiltinFunction(function=_iter_function, builtin=iter)),
-    'raw_input': BuiltinName(BuiltinFunction(function=_input_function, builtin=raw_input)),
+    #'raw_input': BuiltinName(BuiltinFunction(function=_input_function, builtin=raw_input)),
     }
 
 builtins = BuiltinModule('__builtin__', initial=_initial_builtins)

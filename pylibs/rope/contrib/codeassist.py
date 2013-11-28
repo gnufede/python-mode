@@ -423,7 +423,7 @@ class _PythonCodeAssist(object):
             try:
                 function_pyname = rope.base.evaluate.\
                     eval_str(scope, primary)
-            except exceptions.BadIdentifierError, e:
+            except exceptions.BadIdentifierError as e:
                 return {}
             if function_pyname is not None:
                 pyobject = function_pyname.get_object()
